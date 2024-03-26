@@ -15,3 +15,8 @@ It currently supports:
 - Extract Creation(createExtract)
 - Create Checkpoint Table(createCkptTable)
 - Create Replicat in the same deployment(createReplicatSameDeployment)
+
+
+
+## [AdminClient Commands](adminclient)
+- [Purge Trails](adminclient/purge_trails.md)
