@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "bc4b5d20-a56d-4939-8d4f-79b871d197ed",
+		"name": "OGG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3624161",
+		"_collection_link": "https://warped-shuttle-567383.postman.co/workspace/meuOGG~ae158d72-3f37-4813-bac9-1a6c9f95a9ac/collection/3624161-bc4b5d20-a56d-4939-8d4f-79b871d197ed?action=share&source=collection_link&creator=3624161"
+	},
+	"item": [
+		{
+			"name": "getTasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/tasks",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMessages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/messages",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"teste\",\r\n    \"credential\": \"TEste123###\",\r\n    \"info\": \"cred\",\r\n    \"type\": \"Basic\",\r\n    \"role\": \"Operator\"\r\n}"
+				},
+				"url": {
+					"raw": "https:/{{sourceOggURL}}/services/adminsrvr/v2/authorizations/Operator/teste",
+					"host": [
+						"https"
+					],
+					"port": "",
+					"path": [
+						"{{sourceOggURL}}",
+						"services",
+						"adminsrvr",
+						"v2",
+						"authorizations",
+						"Operator",
+						"teste"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCredential",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\": \"{{credName}}\",\r\n    \"password\": \"{{credPass}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/credentials/OracleGoldenGate/{{credName}}",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"credentials",
+						"OracleGoldenGate",
+						"{{credName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createDistPath",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"$schema\":\"ogg:distPath\",\r\n   \"name\":\"{{distPathName}}\",\r\n   \"description\":\"my test distPath\",\r\n   \"source\":{\r\n      \"uri\":\"trail://{{sourceOggURL}}/services/distsrvr/v2/sources?trail={{sourceTrailName}}\"\r\n   },\r\n   \"target\":{\r\n      \"uri\":\"wss://{{targetOggURL}}:443/services/v2/targets?trail={{targetTrailName}}\",\r\n      \"authenticationMethod\":{\r\n         \"domain\":\"OracleGoldenGate\",\r\n         \"alias\":\"{{credName}}\"\r\n      },\r\n      \"details\":{\r\n         \"trail\":{\r\n            \"seqLength\":9,\r\n            \"sizeMB\":500\r\n         },\r\n         \"encryption\":{\r\n            \"algorithm\":\"NONE\"\r\n         },\r\n         \"compression\":{\r\n            \"enabled\":false\r\n         }\r\n      }\r\n   },\r\n   \"begin\":{\r\n      \"sequence\":0,\r\n      \"offset\":0\r\n   },\r\n   \"status\":\"running\"\r\n}"
+				},
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/sources/{{distPathName}}",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"sources",
+						"{{distPathName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createExtract",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"description\": \"criar ex\",\r\n\"credentials\": {\r\n    \"domain\": \"OracleGoldenGate\",\r\n    \"alias\": \"{{sourceDB}}\"\r\n},\r\n\"intent\": \"Unidirectional\",\r\n\"status\": \"stopped\",\r\n\"begin\": \"now\",\r\n\"managedProcessSettings\": \"Default\",\r\n\"encryptionProfile\": \"LocalWallet\",\r\n\"source\": \"tranlogs\",\r\n\"registration\": {\r\n    \"share\": true\r\n},\r\n\"targets\": [\r\n    {\r\n        \"name\": \"ee\",\r\n        \"remote\": false,\r\n        \"path\": \"{{extName}}\",\r\n        \"sequence\": 0,\r\n        \"sizeMB\": 500,\r\n        \"offset\": 0\r\n    }\r\n],\r\n\"config\": [\r\n    \"EXTRACT {{extName}}\",\r\n    \"USERIDALIAS {{sourceDB}} DOMAIN OracleGoldenGate\",\r\n    \"EXTTRAIL {{extName}}/ee\",\r\n    \"TRANLOGOPTIONS SOURCE_OS_TIMEZONE GMT-3\",\r\n    \"table dbworld.*;\"\r\n]\r\n}"
+				},
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/extracts/{{extName}}",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"extracts",
+						"{{extName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCkptTable",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"operation\":\"add\",\"name\":\"ggadmin.cktpTable\"}"
+				},
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/connections/OracleGoldenGate.{{sourceDB}}/tables/checkpoint",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"connections",
+						"OracleGoldenGate.{{sourceDB}}",
+						"tables",
+						"checkpoint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createReplicatSameDeployment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"Create Replicat Demo\",\r\n    \"config\":[\r\n        \"REPLICAT {{repName}}\",\r\n        \"USERIDALIAS {{targetDB}} DOMAIN OracleGoldenGate\",\r\n        \"DDL INCLUDE MAPPED\",\r\n        \"MAP *.*, TARGET *.*;\"\r\n        ],\r\n        \"credentials\": {\"alias\":\"{{targetDB}}\"},\r\n        \"mode\": {\"parallel\":false,\"type\":\"integrated\"},\r\n        \"source\": {\"path\": \"{{extName}}\",\"name\": \"ee\"},\r\n        \"checkpoint\":{\"table\":\"oggadmin.cktpTable\"},\r\n        \"status\": \"stopped\"\r\n    }"
+				},
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/replicats/{{repName}}",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"replicats",
+						"{{repName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addTrandata",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"operation\":\"add\",\"schemaName\":\"{{schemaTrandata}}\",\"allColumns\": true}"
+				},
+				"url": {
+					"raw": "https://{{sourceOggURL}}/services/v2/connections/OracleGoldenGate.{{sourceDB}}/trandata/schema",
+					"protocol": "https",
+					"host": [
+						"{{sourceOggURL}}"
+					],
+					"path": [
+						"services",
+						"v2",
+						"connections",
+						"OracleGoldenGate.{{sourceDB}}",
+						"trandata",
+						"schema"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{myPasswrd}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{myUser}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "myUser",
+			"value": "oggadmin"
+		},
+		{
+			"key": "myPasswrd",
+			"value": "SENHA"
+		},
+		{
+			"key": "sourceOggURL",
+			"value": "HOST:PORT"
+		},
+		{
+			"key": "targetOggURL",
+			"value": ""
+		},
+		{
+			"key": "userName",
+			"value": ""
+		},
+		{
+			"key": "userPass",
+			"value": ""
+		},
+		{
+			"key": "credName",
+			"value": "teste"
+		},
+		{
+			"key": "credPass",
+			"value": ""
+		},
+		{
+			"key": "distPathName",
+			"value": ""
+		},
+		{
+			"key": "sourceTrailName",
+			"value": ""
+		},
+		{
+			"key": "targetTrailName",
+			"value": ""
+		},
+		{
+			"key": "schemaTrandata",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "sourceDB",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "targetDB",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "extName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "repName",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
