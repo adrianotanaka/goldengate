@@ -6,11 +6,12 @@ This script is heavily based on variables that can be configured at the session 
 
 ![https://imgur.com/OM2XP10](https://i.imgur.com/OM2XP10.png)
 
-Currently it supports:
-User Creation(createUser)
-Credential Creation(createCredential)
-Distribution Path Creation(createDistPath)
-Add Schema Trandata(addTrandata)
-Extract Creation(createExtract)
-Create Checkpoint Table(createCkptTable)
-Create Replicat in the same deployment(createReplicatSameDeployment)
+It currently supports:
+
+- User Creation(createUser)
+- Credential Creation(createCredential)
+- Distribution Path Creation(createDistPath)
+- Add Schema Trandata(addTrandata)
+- Extract Creation(createExtract)
+- Create Checkpoint Table(createCkptTable)
+- Create Replicat in the same deployment(createReplicatSameDeployment)
