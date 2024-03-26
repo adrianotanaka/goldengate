@@ -1,6 +1,6 @@
 In this repo I will share some scripts that I use with GoldenGate.
 
-[My Postman Collection with common REST API Actions](OGG.postman_collection.json)
+[My Postman Collection with common REST API Actions](postman/OGG.postman_collection.json)
 
 This script is heavily based on variables that can be configured at the session level (Current Value) or permanently (Initial Value), so take a minute to understand each variable.
 
